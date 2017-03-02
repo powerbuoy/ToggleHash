@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/powerbuoy/ToggleHash.git"
+    "url": "git+https://github.com/powerbuoy/toggle-hash.git"
   },
   "author": "Andreas Lagerkvist",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/powerbuoy/ToggleHash/issues"
+    "url": "https://github.com/powerbuoy/toggle-hash/issues"
   },
-  "homepage": "https://github.com/powerbuoy/ToggleHash#readme",
+  "homepage": "https://github.com/powerbuoy/toggle-hash#readme",
   "dependencies": {
     "jquery": "^3.1.0"
   }
