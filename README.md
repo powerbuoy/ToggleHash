@@ -1,2 +1,1 @@
-# ToggleHash
-Toggles the hash when clicking an in page link.
+Toggles the hash without scrolling when clicking an in page link.
