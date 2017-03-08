@@ -13,40 +13,57 @@
 	$.fn.toggleHash = function (conf) {
 		conf = conf || {};
 
-		return this.click(function (e) {
-			e.preventDefault();
+		var config = {
+			onAdd: conf.onAdd || function () {},
+			onRemove: conf.onRemove || function () {}
+		};
 
-			var clicked = $(this);
-			var clickedHash = clicked.attr('href');
-			var currHash = window.location.hash;
-			var config = {
-				onAdd: conf.onAdd || function () {},
-				onRemove: conf.onRemove || function () {}
-			};
+		return this.each(function () {
+			var t = $(this);
+			var tHash = t.attr('href');
 
-			// We're currently on this hash - clear it
-			if (clickedHash == currHash) {
-				var st = $(document).scrollTop();
-
-				window.location.hash = '#';
-
-				$(document).scrollTop(st);
-
-				if ('replaceState' in window.history) {
-					window.history.replaceState('', document.title, window.location.pathname + window.location.search);
+			// Trigger callback on hash change
+			$(window).on('hashchange', function () {
+				if (window.location.hash == tHash) {
+					config.onAdd(tHash);
 				}
+				else {
+					config.onRemove(tHash);
+				}
+			});
 
-				config.onRemove(clickedHash);
-			}
-			else {
-				var st = $(document).scrollTop();
+			// Toggle hash on click
+			t.click(function (e) {
+				e.preventDefault();
 
-				window.location.hash = clickedHash;
+				var clicked = $(this);
+				var clickedHash = clicked.attr('href');
+				var currHash = window.location.hash;
 
-				$(document).scrollTop(st);
+				// We're currently on this hash - clear it
+				if (clickedHash == currHash) {
+					var st = $(document).scrollTop();
 
-				config.onAdd(clickedHash);
-			}
+					window.location.hash = '#';
+
+					$(document).scrollTop(st);
+
+					if ('replaceState' in window.history) {
+						window.history.replaceState('', document.title, window.location.pathname + window.location.search);
+					}
+
+					config.onRemove(clickedHash);
+				}
+				else {
+					var st = $(document).scrollTop();
+
+					window.location.hash = clickedHash;
+
+					$(document).scrollTop(st);
+
+					config.onAdd(clickedHash);
+				}
+			});
 		});
 	};
 });
