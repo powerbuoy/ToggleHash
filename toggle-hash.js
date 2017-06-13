@@ -22,15 +22,15 @@
 			var t = $(this);
 			var tHash = t.attr('href');
 
-			// Trigger callback on hash change
-			$(window).on('hashchange', function () {
+			// Trigger callback on hash change (NOTE: Collides with other libs like smooth scroll...)
+		/*	$(window).on('hashchange', function () {
 				if (window.location.hash == tHash) {
 					config.onAdd(tHash);
 				}
 				else {
 					config.onRemove(tHash);
 				}
-			});
+			}); */
 
 			// Toggle hash on click
 			t.click(function (e) {
